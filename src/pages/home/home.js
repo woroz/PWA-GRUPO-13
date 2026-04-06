@@ -3,6 +3,7 @@ import styles from './home.module.css';
 import Titulo from '../../components/titulo/titulo'
 import Boton from '../../components/boton/boton'
 import Contador from '../../components/contador/contador';
+import MovieCard from '../../components/movieCard/movieCard';
 
 const Peliculas = [
   { titulo: "Inception", genero: "ciencia ficcion", anio: 2010 },
@@ -20,10 +21,21 @@ const home = () => {
             <p>Pagina principal</p>
             <Boton texto="boton" funcion=""/>
             <Contador Peliculas={Peliculas}/>
+            <br />
+            <div className={styles.containerMovieCard}>
+                {Peliculas.map((pelicula, index) => (
+                  <MovieCard 
+                  key={index}
+                  imagen=""
+                  titulo={pelicula.titulo}
+                  genero={pelicula.genero}
+                  anio={pelicula.anio}
+                  />
+                  ))}
+                  </div>
         </div>
     )
     
 }
-
 
 export default home
