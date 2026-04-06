@@ -1,0 +1,34 @@
+.contadorContainer {
+  background: #1e1e2f;
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+  margin: 20px auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  font-family: Arial, sans-serif;
+}
+
+
+.total {
+  color: #a0a0ff;
+}
+
+.lista {
+  padding: 0;
+}
+
+.item {
+  background: #2a2a40;
+  margin: 5px 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  transition: 0.2s;
+}
+
+.item:hover {
+  background: #3a3a60;
+  transform: translateX(5px);
+}
