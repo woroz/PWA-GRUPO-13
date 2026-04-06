@@ -5,3 +5,10 @@
   color: white;
   min-height: 100vh;
 }
+
+.containerMovieCard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
