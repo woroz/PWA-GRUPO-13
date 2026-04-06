@@ -1,10 +1,11 @@
 import React from 'react';
-import './home.module.css';
+import styles from './home.module.css';
+import Titulo from '../../components/titulo/titulo'
 
 const home = () => {
     return (
-        <div className="container">
-            <h1>Gestor de peliculas</h1>
+        <div className={styles.container}>
+            <Titulo texto="Gestor de peliculas" /> 
             <p>Pagina principal</p>
         </div>
     )
