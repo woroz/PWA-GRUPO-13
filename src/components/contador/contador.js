@@ -1,5 +1,5 @@
 import styles from "./contador.module.css";
-
+import Titulo from "../titulo/titulo";
 const Contador = ({ Peliculas }) => {
 
     let cantidadPeliculas = Peliculas.length;
@@ -17,10 +17,10 @@ const Contador = ({ Peliculas }) => {
 
     return (
         <div className={styles.contadorContainer}>
-            <h2 className={styles.titulo}>🎬 Contador</h2>
+            <Titulo texto="Contador de Peliculas" />
 
             <p className={styles.total}>
-                Cantidad de películas: {cantidadPeliculas}
+                Cantidad de peliculas: {cantidadPeliculas}
             </p>
 
             <ul className={styles.lista}>
