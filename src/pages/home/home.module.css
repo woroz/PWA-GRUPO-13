@@ -12,3 +12,8 @@
   gap: 20px;
   justify-content: center;
 }
+
+.containerForm {
+  display: flex;
+  justify-content: center;
+}

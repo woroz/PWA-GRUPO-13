@@ -1,41 +1,75 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './home.module.css';
 import Titulo from '../../components/titulo/titulo'
 import Boton from '../../components/boton/boton'
 import Contador from '../../components/contador/contador';
 import MovieCard from '../../components/movieCard/movieCard';
+import Formulario from '../../components/formulario/formulario';
 
 const Peliculas = [
-  { titulo: "Inception", genero: "ciencia ficcion", anio: 2010 },
-  { titulo: "Titanic", genero: "romance", anio: 1997 },
-  { titulo: "The Dark Knight", genero: "accion", anio: 2008 },
-  { titulo: "Interstellar", genero: "ciencia ficcion", anio: 2014 },
-  { titulo: "Superbad", genero: "comedia", anio: 2007 },
-  { titulo: "The Hangover", genero: "comedia", anio: 2009 }
+  { imagen: "", titulo: "Inception", genero: "ciencia ficcion", anio: 2010 },
+  { imagen: "", titulo: "Titanic", genero: "romance", anio: 1997 },
+  { imagen: "", titulo: "The Dark Knight", genero: "accion", anio: 2008 },
+  { imagen: "", titulo: "Interstellar", genero: "ciencia ficcion", anio: 2014 },
+  { imagen: "", titulo: "Superbad", genero: "comedia", anio: 2007 },
+  { imagen: "", titulo: "The Hangover", genero: "comedia", anio: 2009 }
 ];
 
-const home = () => {
+const Home = () => {
+
+    const [peliculas, setPeliculas] = useState(() => {
+      const guardadas = localStorage.getItem("peliculas");
+      return guardadas ? JSON.parse(guardadas) : Peliculas;
+});
+
+    const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
+    useEffect(() => {
+    localStorage.setItem("peliculas", JSON.stringify(peliculas));
+  }, 
+  [peliculas]);
+
+    const editarPelicula = (pelicula) => {
+    setPeliculaSeleccionada(pelicula);
+};
+
+    const guardarPelicula = (peliculaEditada) => {
+    const nuevasPeliculas = peliculas.map((p) =>
+    p.titulo === peliculaSeleccionada.titulo ? peliculaEditada : p
+    );
+    setPeliculas(nuevasPeliculas);
+    setPeliculaSeleccionada(null);
+};
+
     return (
         <div className={styles.container}>
             <Titulo texto="Gestor de peliculas" /> 
             <p>Pagina principal</p>
             <Boton texto="boton" funcion=""/>
-            <Contador Peliculas={Peliculas}/>
+            <Contador Peliculas={peliculas}/>
             <br />
             <div className={styles.containerMovieCard}>
-                {Peliculas.map((pelicula, index) => (
+                {peliculas.map((pelicula, index) => (
                   <MovieCard 
                   key={index}
-                  imagen=""
+                  imagen={pelicula.imagen}
                   titulo={pelicula.titulo}
                   genero={pelicula.genero}
                   anio={pelicula.anio}
+                  clickEditar={editarPelicula}
                   />
                   ))}
-                  </div>
+            </div>
+            {peliculaSeleccionada && ( 
+              <div className={styles.containerForm}>
+                <Formulario 
+                pelicula={peliculaSeleccionada}
+                clickGuardar={guardarPelicula}
+                />
+                </div>
+                )}
         </div>
     )
     
 }
 
-export default home
+export default Home
