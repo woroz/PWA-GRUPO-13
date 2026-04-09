@@ -5,6 +5,7 @@ import Boton from '../../components/boton/boton'
 import Contador from '../../components/contador/contador';
 import MovieCard from '../../components/movieCard/movieCard';
 import Formulario from '../../components/formulario/formulario';
+import Select from '../../components/select/select';
 
 const Peliculas = [
   { imagen: "", titulo: "Inception", genero: "ciencia ficcion", anio: 2010 },
@@ -16,28 +17,28 @@ const Peliculas = [
 ];
 
 const Home = () => {
-
     const [peliculas, setPeliculas] = useState(() => {
       const guardadas = localStorage.getItem("peliculas");
       return guardadas ? JSON.parse(guardadas) : Peliculas;
 });
-
     const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
     useEffect(() => {
     localStorage.setItem("peliculas", JSON.stringify(peliculas));
   }, 
   [peliculas]);
 
+
     const editarPelicula = (pelicula) => {
     setPeliculaSeleccionada(pelicula);
 };
-
     const onClickEditar = (peliculaEditada) => {
     const nuevaPelicula = peliculas.map((p) =>
     p.titulo === peliculaSeleccionada.titulo ? peliculaEditada : p);
     setPeliculas(nuevaPelicula);
     setPeliculaSeleccionada(null);
 };
+
+const generos = [...new Set(peliculas.map(p => p.genero))];
 
     return (
         <div className={styles.container}>
@@ -46,6 +47,8 @@ const Home = () => {
             <Boton texto="boton" funcion=""/>
             <Contador Peliculas={peliculas}/>
             <br />
+            <Select opciones={generos.map(g => ({ value: g, label: g }))}/>
+            <br /><br /><br />
             <div className={styles.containerMovieCard}>
                 {peliculas.map((pelicula, index) => (
                   <MovieCard 
@@ -69,7 +72,6 @@ const Home = () => {
                 )}
         </div>
     )
-    
 }
 
 export default Home
