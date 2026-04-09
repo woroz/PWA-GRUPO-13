@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import styles from './formulario.module.css';
+import Titulo from '../titulo/titulo';
+import Boton from '../boton/boton';
 
-const Formulario = ({ pelicula, clickGuardar }) => {
-  const [formData, setFormData] = useState(pelicula);
+const Formulario = ({ titulo, pelicula, onClick }) => {
+  const [formData, setFormData] = useState({
+  titulo: "",
+  genero: "",
+  anio: "",
+  imagen: ""
+});
+
   useEffect(() => {
+    if (pelicula) {
     setFormData(pelicula);
+  }
   }, [pelicula]);
-  if (!pelicula) return null;
 
-
-    const cambiarValorInput = (e) => {
+    const valorInput = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -29,31 +37,30 @@ const Formulario = ({ pelicula, clickGuardar }) => {
       reader.readAsDataURL(file);
     }
 
-
   };
   return (
     <div className={styles.form}>
-      <h2>Editar Película</h2>
-      <label>Título:</label>
+      <Titulo texto={titulo} />
+      <label>Titulo</label>
       <input
         type="text"
         name="titulo"
         value={formData.titulo}
-        onChange={cambiarValorInput}
+        onChange={valorInput}
       />
       <label>Género:</label>
       <input
         type="text"
         name="genero"
         value={formData.genero}
-        onChange={cambiarValorInput}
+        onChange={valorInput}
       />
       <label>Año:</label>
       <input
         type="number"
         name="anio"
         value={formData.anio}
-        onChange={cambiarValorInput}
+        onChange={valorInput}
       />
       <label>Imagen:</label>
       <input
@@ -69,9 +76,7 @@ const Formulario = ({ pelicula, clickGuardar }) => {
         />
       )}
       <br />
-      <button className={styles.botclickGuardar} onClick={() => clickGuardar(formData)}>
-        Guardar
-        </button>
+      <Boton texto="Guardar" funcion={() => onClick(formData)} />
     </div>
     );
 };

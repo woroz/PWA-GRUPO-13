@@ -32,11 +32,10 @@ const Home = () => {
     setPeliculaSeleccionada(pelicula);
 };
 
-    const guardarPelicula = (peliculaEditada) => {
-    const nuevasPeliculas = peliculas.map((p) =>
-    p.titulo === peliculaSeleccionada.titulo ? peliculaEditada : p
-    );
-    setPeliculas(nuevasPeliculas);
+    const onClickEditar = (peliculaEditada) => {
+    const nuevaPelicula = peliculas.map((p) =>
+    p.titulo === peliculaSeleccionada.titulo ? peliculaEditada : p);
+    setPeliculas(nuevaPelicula);
     setPeliculaSeleccionada(null);
 };
 
@@ -61,9 +60,10 @@ const Home = () => {
             </div>
             {peliculaSeleccionada && ( 
               <div className={styles.containerForm}>
-                <Formulario 
+                <Formulario
+                titulo="Editar Película"
                 pelicula={peliculaSeleccionada}
-                clickGuardar={guardarPelicula}
+                onClick={onClickEditar}
                 />
                 </div>
                 )}
