@@ -25,7 +25,7 @@ const Contador = ({ Peliculas }) => {
 
             <ul className={styles.lista}>
                 {Object.entries(contadorGeneros).map(([genero, cantidad]) => (
-                    <li key={genero} className={styles.item}>
+                    <li className={styles.item}>
                         <span>{genero}</span>
                         <span>{cantidad}</span>
                     </li>
