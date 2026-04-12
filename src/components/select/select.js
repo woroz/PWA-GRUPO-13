@@ -1,8 +1,8 @@
 import Styles from "./select.module.css";
 
-const Select = ({opciones}) => {
+const Select = ({ opciones, onChange }) => {
     return (
-        <select className={Styles.select}>
+        <select className={Styles.select} onChange={onChange}>
             {opciones.map((opcion, id) => (
                 <option id={id} value={opcion.value}>
                     {opcion.label}
