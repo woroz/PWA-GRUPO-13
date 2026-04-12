@@ -1,7 +1,7 @@
 import styles from './movieCard.module.css';
 import Boton from '../boton/boton';
 
-const MovieCard = ({ id, imagen, titulo, genero, tipo, anio, estado, clickEditar, cambiarEstado, eliminarPelicula }) => { 
+const MovieCard = ({ id, imagen, titulo, genero, tipo, anio, estado, rating, clickEditar, cambiarEstado, eliminarPelicula }) => { 
   return ( 
     <div className={styles.card}>
 
@@ -19,6 +19,9 @@ const MovieCard = ({ id, imagen, titulo, genero, tipo, anio, estado, clickEditar
 
         <div className={styles.fila}>
           <span>{anio}</span>
+
+          <span className={styles.rating}>{rating}</span>
+
           <span className={estado ? styles.vista : styles.noVista}>
             {estado ? "vista" : "por ver"}
           </span>
@@ -27,10 +30,10 @@ const MovieCard = ({ id, imagen, titulo, genero, tipo, anio, estado, clickEditar
         <div className={styles.botones}>
           <Boton
             texto="Editar"
-            funcion={() => clickEditar({ id, imagen, titulo, genero, tipo, anio, estado })}
+            funcion={() => clickEditar({ id, imagen, titulo, genero, tipo, anio, estado, rating })}
           />
 
-          <Boton texto="Eliminar" funcion={() => eliminarPelicula(id)} />
+          <Boton texto="Eliminar" className={styles.danger} funcion={() => eliminarPelicula(id)} />
 
           <Boton texto="Visto" funcion={() => cambiarEstado(id)} />
         </div>

@@ -9,6 +9,7 @@ const Formulario = ({ titulo, pelicula, onClick }) => {
   titulo: "",
   genero: "",
   anio: "",
+  rating: "",
   imagen: ""
 });
 
@@ -66,6 +67,15 @@ if (file) {
       type="number"
       placeholder="Ingrese el año"
       value={formData.anio}
+      onChange={valorInput}
+      />
+
+      <Input
+      label="Rating"
+      name="rating"
+      type="number"
+      placeholder="Ingrese el rating"
+      value={formData.rating}
       onChange={valorInput}
       />
 
