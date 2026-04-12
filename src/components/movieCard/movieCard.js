@@ -1,7 +1,7 @@
 import styles from './movieCard.module.css';
 import Boton from '../boton/boton';
 
-const MovieCard = ({ id, imagen, titulo, genero, tipo, anio, estado, clickEditar, cambiarEstado }) => { 
+const MovieCard = ({ id, imagen, titulo, genero, tipo, anio, estado, clickEditar, cambiarEstado, eliminarPelicula }) => { 
   return ( 
     <div className={styles.card}>
 
@@ -30,7 +30,7 @@ const MovieCard = ({ id, imagen, titulo, genero, tipo, anio, estado, clickEditar
             funcion={() => clickEditar({ id, imagen, titulo, genero, tipo, anio, estado })}
           />
 
-          <Boton texto="Eliminar" funcion={() => console.log("Eliminar")} />
+          <Boton texto="Eliminar" funcion={() => eliminarPelicula(id)} />
 
           <Boton texto="Visto" funcion={() => cambiarEstado(id)} />
         </div>
