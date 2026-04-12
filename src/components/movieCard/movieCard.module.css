@@ -34,7 +34,6 @@
   font-weight: bold; 
 }
 
-/* Tags */
 .tags { 
   display: flex; 
   gap: 4px; 
@@ -47,7 +46,6 @@
   font-size: 12px;
 }
 
-/* Info fila */
 .fila {
   display: flex;
   justify-content: space-between;
@@ -55,7 +53,6 @@
   color: #bbb;
 }
 
-/* Estado */
 .vista {
   color: #4caf50;
   font-weight: bold;
@@ -66,10 +63,29 @@
   font-weight: bold;
 }
 
-/* Botones */
 .botones {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 6px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.botones button:last-child {
+  grid-column: span 2;
+}
+
+.rating {
+  font-weight: bold;
+  color: #ffcc00; 
+  background: rgba(255, 204, 0, 0.1);
+  padding: 2px 6px;
+  border-radius: 5px;
+}
+
+.danger {
+  background-color: #f44336 !important;
+}
+
+.danger:hover {
+  background-color: #d32f2f !important;
 }

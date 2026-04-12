@@ -1,0 +1,49 @@
+/* Contenedor principal de la sección */
+.seccionOrden {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 25px 0;
+  padding: 20px;
+  background-color: #1e1e2f; /* Igual al contador y filtros */
+  border-radius: 12px;
+  border: 1px solid #3f445e;
+}
+
+.seccionOrden p {
+  margin: 0;
+  font-weight: bold;
+  color: #a0a0ff; /* Mismo color que el total del contador */
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+/* Contenedor de los selects */
+.controlesOrden {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+/* Estilo para los SELECTS dentro del ordenador */
+.seccionOrden select {
+  background-color: #2a2d3e;
+  color: white;
+  border: 2px solid #3f445e;
+  padding: 8px 15px;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.seccionOrden select:hover {
+  border-color: #7b5cff; /* Color celeste del título */
+}
+
+.seccionOrden select:focus {
+  box-shadow: 0 0 0 2px rgba(97, 218, 251, 0.2);
+}
