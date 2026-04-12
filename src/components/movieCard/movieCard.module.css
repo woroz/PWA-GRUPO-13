@@ -1,49 +1,75 @@
-.card {
-  width: 220px;
-  border-radius: 15px;
-  overflow: hidden;
-  background: #1c1c1c;
-  color: white;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
+.card { 
+  width: 250px; 
+  background-color: #1e1e1e; 
+  border-radius: 16px; 
+  overflow: hidden; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4); 
+  transition: transform 0.2s ease, box-shadow 0.2s ease; 
+  color: #fff; 
+  display: flex; 
+  flex-direction: column; 
+} 
 
-.card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-}
+.card:hover { 
+  transform: translateY(-5px); 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6); 
+} 
 
 .imagen {
   width: 100%;
-  height: 320px;
+  height: 200px;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  background-color: #333;
 }
 
-.card:hover .imagen {
-  transform: scale(1.1);
+.contenido { 
+  padding: 12px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 8px;
+} 
+
+.titulo { 
+  font-size: 20px; 
+  font-weight: bold; 
 }
 
-.info {
-  padding: 12px;
-  text-align: center;
+/* Tags */
+.tags { 
+  display: flex; 
+  gap: 4px; 
 }
 
-.info h3 {
-  margin: 5px 0;
-  font-size: 18px;
+.tag {
+  background-color: #2a2a2a;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
 }
 
-.info p {
-  margin: 2px 0;
-  font-size: 14px;
-  color: #ccc;
-}
-
-.container {
+/* Info fila */
+.fila {
   display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
-  justify-content: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #bbb;
+}
+
+/* Estado */
+.vista {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.noVista {
+  color: #f44336;
+  font-weight: bold;
+}
+
+/* Botones */
+.botones {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
 }
