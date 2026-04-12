@@ -1,0 +1,12 @@
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.titulo {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ccc;
+  margin-bottom: 5px;
+}
