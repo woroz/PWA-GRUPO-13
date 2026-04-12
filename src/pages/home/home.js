@@ -60,6 +60,12 @@ const Home = () => {
     return coincideTitulo && coincideGenero && coincideTipo;
   });
 
+  const eliminarPelicula = (id) => {
+    const nuevasPeliculas = peliculas.filter((peli) => peli.id !== id)
+    
+    setPeliculas(nuevasPeliculas)
+  }
+
   const generos = ["todos", ...new Set(peliculas.map(p => p.genero.toLowerCase()))];
   const tipos = ["todos", ...new Set(peliculas.map(p => p.tipo.toLowerCase()))];
 
@@ -103,6 +109,7 @@ const Home = () => {
             estado={pelicula.estado}
             clickEditar={editarPelicula}
             cambiarEstado={editarEstado}
+            eliminarPelicula={eliminarPelicula}
           />
         ))}
       </div>
