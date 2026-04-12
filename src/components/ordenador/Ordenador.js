@@ -13,3 +13,5 @@ function Ordenador({ criterio, sentido, onChange }) {
     </div>
   );
 }
+
+export default Ordenador;

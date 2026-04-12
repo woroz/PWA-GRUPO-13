@@ -9,12 +9,12 @@ import Select from '../../components/select/select';
 import Input from '../../components/input/input';
 
 const Peliculas = [
-  { imagen: "", titulo: "Inception", genero: "ciencia ficcion", anio: 2010 },
-  { imagen: "", titulo: "Titanic", genero: "romance", anio: 1997 },
-  { imagen: "", titulo: "The Dark Knight", genero: "accion", anio: 2008 },
-  { imagen: "", titulo: "Interstellar", genero: "ciencia ficcion", anio: 2014 },
-  { imagen: "", titulo: "Superbad", genero: "comedia", anio: 2007 },
-  { imagen: "", titulo: "The Hangover", genero: "comedia", anio: 2009 }
+  { imagen: "", titulo: "Inception", genero: "ciencia ficcion", anio: 2010, estado : false },
+  { imagen: "", titulo: "Titanic", genero: "romance", anio: 1997, estado : false },
+  { imagen: "", titulo: "The Dark Knight", genero: "accion", anio: 2008, estado : false },
+  { imagen: "", titulo: "Interstellar", genero: "ciencia ficcion", anio: 2014, estado : false },
+  { imagen: "", titulo: "Superbad", genero: "comedia", anio: 2007, estado : false },
+  { imagen: "", titulo: "The Hangover", genero: "comedia", anio: 2009, estado : false }
 ];
 
 const Home = () => {
@@ -26,6 +26,8 @@ const Home = () => {
 const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
 
 const [busqueda, setBusqueda ] = useState("")
+
+const [generoElegido, setGeneroElegido] = useState("todos");
 
 useEffect(() => {
   localStorage.setItem("peliculas", JSON.stringify(peliculas));
@@ -42,11 +44,13 @@ const onClickEditar = (peliculaEditada) => {
   setPeliculaSeleccionada(null);
 };
 
-const peliculasFiltradas = peliculas.filter((peli) =>
-peli.titulo.toLowerCase().includes(busqueda.toLowerCase())
-);
+const peliculasFiltradas = peliculas.filter((peli) => {
+  const coincideTitulo = peli.titulo.toLowerCase().includes(busqueda.toLowerCase())
+  const coincideGenero = generoElegido === "todos" || peli.genero === generoElegido;
+  return coincideTitulo && coincideGenero;
+});
 
-const generos = [...new Set(peliculas.map(p => p.genero))];
+const generos = ["todos", ...new Set(peliculas.map(p => p.genero.toLowerCase()))];
 
   return (
       <div className={styles.container}>
@@ -58,7 +62,12 @@ const generos = [...new Set(peliculas.map(p => p.genero))];
           <Boton texto="Agregar Pelicula" funcion=""/>
           <Contador Peliculas={peliculas}/>
           <br />
-          <Select opciones={generos.map(g => ({ value: g, label: g }))}/>
+
+          <Select 
+          opciones={generos.map(genero => ({ value: genero, label: genero }))} 
+          onChange={(evento) => setGeneroElegido(evento.target.value)} 
+          />
+
           <br /><br /><br />
 
           <div className={styles.containerMovieCard}>
