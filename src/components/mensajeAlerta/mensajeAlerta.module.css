@@ -1,0 +1,23 @@
+.alert {
+  padding: 16px 20px;
+  background-color: #1e1e2f; 
+  color: white;
+  margin-bottom: 200px;
+  border-radius: 12px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  font-family: sans-serif;
+}
+
+span.mensaje {
+  color: rgba(255, 255, 255, 0.738);
+  font-weight: bold;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+  padding: 4px;
+}
