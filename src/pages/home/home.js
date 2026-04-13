@@ -8,6 +8,7 @@ import Formulario from '../../components/formulario/formulario';
 import Input from '../../components/input/input';
 import Filtro from '../../components/filtro/filtro';
 import Ordenador from '../../components/ordenador/Ordenador';
+import MensajeAlerta from '../../components/mensajeAlerta/mensajeAlerta';
 
 const Peliculas = [
   { id: 1, imagen: "", titulo: "Inception", genero: "Ciencia ficcion", tipo: "Pelicula", anio: 2010, estado: true, rating: 8.8 },
@@ -136,7 +137,8 @@ const Home = () => {
       <br /><br /><br />
 
       <div className={styles.containerMovieCard}>
-        {peliculasOrdenadas.map((pelicula) => (
+        {peliculasOrdenadas.length > 0 ? (
+         peliculasOrdenadas.map((pelicula) => (
           <MovieCard
             key={pelicula.id}
             id={pelicula.id}
@@ -151,7 +153,9 @@ const Home = () => {
             cambiarEstado={editarEstado}
             eliminarPelicula={eliminarPelicula}
           />
-        ))}
+        ))
+      ) : (<MensajeAlerta mensajeAlerta="No se encontraron resultados." />)
+      }
       </div>
 
       {peliculaSeleccionada && (
