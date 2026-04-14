@@ -8,7 +8,6 @@ import Formulario from '../../components/formulario/formulario';
 import Input from '../../components/input/input';
 import Filtro from '../../components/filtro/filtro';
 import Ordenador from '../../components/ordenador/Ordenador';
-
 const Peliculas = [
   { id: 1, imagen: "", titulo: "Inception", genero: "Ciencia ficcion", tipo: "Pelicula", anio: 2010, estado: true, rating: 8.8 },
   { id: 2, imagen: "", titulo: "Titanic", genero: "Romance", tipo: "Pelicula", anio: 1997, estado: false, rating: 7.8 },

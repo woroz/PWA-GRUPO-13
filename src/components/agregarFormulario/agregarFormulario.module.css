@@ -1,0 +1,36 @@
+.container {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+label {
+  color: #fff;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+input {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+input[type="file"] {
+  background-color: #2a2a2a;
+  color: #fff;
+  cursor: pointer;
+}
+
+img {
+  margin-top: 10px;
+  border-radius: 8px;
+  object-fit: cover;
+}
