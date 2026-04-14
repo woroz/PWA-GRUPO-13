@@ -7,9 +7,11 @@ import MovieCard from '../../components/movieCard/movieCard';
 import FormularioEditar from '../../components/formularioEditar/formularioEditar';
 import Input from '../../components/input/input';
 import Filtro from '../../components/filtro/filtro';
-import Ordenador from '../../components/ordenador/ordenador';
+import Ordenador from '../../components/ordenador/Ordenador';
 import MensajeAlerta from '../../components/mensajeAlerta/mensajeAlerta';
 import FormularioAgregar from '../../components/formularioAgregar/formularioAgregar';
+import Radio from '../../components/radio/Radio';
+
 
 const Peliculas = [
   { id: 1, imagen: "", titulo: "Inception", genero: "Ciencia ficcion", tipo: "Pelicula", anio: 2010, estado: true, rating: 8.8 },
@@ -38,6 +40,9 @@ const Home = () => {
   const [tipoElegido, setTipoElegido] = useState("todos los tipos");
   const [orden, setOrden] = useState({ criterio: 'año', sentido: 'asc' });
   const [mostrarContador, setMostrarContador] = useState(false);
+  const [mostrarVistas, setMostrarVistas] = useState(false);
+  const [mostrarPendientes, setMostrarPendientes] = useState(false);
+  const [mostrarTodo, setMostrarTodo] = useState(true);
 
   useEffect(() => {
     localStorage.setItem("peliculas", JSON.stringify(peliculas));
@@ -107,7 +112,12 @@ const Home = () => {
       tipoElegido === "todos los tipos" ||
       (peli.tipo || "").toLowerCase() === tipoElegido;
 
-    return coincideTitulo && coincideGenero && coincideTipo;
+    let coincideRadio = false;
+    if (mostrarTodo === true) coincideRadio = true;
+    else if (mostrarVistas === true) coincideRadio = peli.estado;
+    else if (mostrarPendientes === true) coincideRadio = !peli.estado;
+
+    return coincideTitulo && coincideGenero && coincideTipo && coincideRadio;
   });
 
   const peliculasOrdenadas = [...peliculasFiltradas].sort((a, b) => {
@@ -137,7 +147,23 @@ const Home = () => {
           <button
             onClick={() => setMostrarContador(!mostrarContador)}
             className={styles.botonIcono}
-          />
+          >
+            <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            >
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <circle cx="12" cy="10" r="3"></circle>
+              <path d="M7 21h10"></path>
+              <path d="M12 17v4"></path>
+            </svg>
+          </button>
 
           <Boton
             className={styles.agregar}
@@ -159,6 +185,43 @@ const Home = () => {
               opciones={tipos.map(t => ({ value: t, label: t }))}
               onChange={(e) => setTipoElegido(e.target.value)}
             />
+
+            <Radio 
+              label="Todas"
+              name="mostrar"
+              value="todas"
+              checked={mostrarTodo}
+              onChange={() => {
+                setMostrarTodo(!mostrarTodo);
+                setMostrarPendientes(false);
+                setMostrarVistas(false);
+              }}
+            />
+
+            <Radio 
+              label="Vistas"
+              name="mostrar"
+              value="vistas"
+              checked={mostrarVistas}
+              onChange={() => {
+                setMostrarVistas(!mostrarVistas);
+                setMostrarPendientes(false);
+                setMostrarTodo(false);
+              }}
+            />
+
+            <Radio 
+              label="Pendientes"
+              name="mostrar"
+              value="pendientes"
+              checked={mostrarPendientes}
+              onChange={() => {
+                setMostrarPendientes(!mostrarPendientes);
+                setMostrarVistas(false);
+                setMostrarTodo(false);
+              }}
+            />
+    
           </div>
 
           <Ordenador
