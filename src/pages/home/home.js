@@ -8,6 +8,8 @@ import Formulario from '../../components/formulario/formulario';
 import Input from '../../components/input/input';
 import Filtro from '../../components/filtro/filtro';
 import Ordenador from '../../components/ordenador/Ordenador';
+import MensajeAlerta from '../../components/mensajeAlerta/mensajeAlerta';
+
 const Peliculas = [
   { id: 1, imagen: "", titulo: "Inception", genero: "Ciencia ficcion", tipo: "Pelicula", anio: 2010, estado: true, rating: 8.8 },
   { id: 2, imagen: "", titulo: "Titanic", genero: "Romance", tipo: "Pelicula", anio: 1997, estado: false, rating: 7.8 },
@@ -31,11 +33,13 @@ const Home = () => {
 
   const [busqueda, setBusqueda] = useState("");
 
-  const [generoElegido, setGeneroElegido] = useState("todos");
+  const [generoElegido, setGeneroElegido] = useState("Todos los generos");
 
-  const [tipoElegido, setTipoElegido] = useState("todos");
+  const [tipoElegido, setTipoElegido] = useState("Todos los tipos");
 
   const [orden, setOrden] = useState ({ criterio: 'año', sentido: 'asc' });
+
+  const [mostrarContador, setMostrarContador] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("peliculas", JSON.stringify(peliculas));
@@ -62,8 +66,8 @@ const Home = () => {
 
   const peliculasFiltradas = peliculas.filter((peli) => {
     const coincideTitulo = peli.titulo.toLowerCase().includes(busqueda.toLowerCase());
-    const coincideGenero = generoElegido === "todos" || peli.genero.toLowerCase() === generoElegido;
-    const coincideTipo = tipoElegido === "todos" || peli.tipo.toLowerCase() === tipoElegido;
+    const coincideGenero = generoElegido === "Todos los generos" || peli.genero.toLowerCase() === generoElegido;
+    const coincideTipo = tipoElegido === "Todos los tipos" || peli.tipo.toLowerCase() === tipoElegido;
     return coincideTitulo && coincideGenero && coincideTipo;
   });
 
@@ -90,52 +94,65 @@ const Home = () => {
     });
   }
 
-  const generos = ["todos", ...new Set(peliculas.map(p => p.genero.toLowerCase()))];
-  const tipos = ["todos", ...new Set(peliculas.map(p => p.tipo.toLowerCase()))];
+  const generos = ["Todos los generos", ...new Set(peliculas.map(p => p.genero.toLowerCase()))];
+  const tipos = ["Todos los tipos", ...new Set(peliculas.map(p => p.tipo.toLowerCase()))];
 
   return (
-    <div className={styles.container}>
-      <Titulo texto="Gestor de peliculas" />
-
-      <Input 
+    <div>
+      <div className={styles.header}>
+        <Titulo texto="Gestor de peliculas" />
+        <div className={styles.ladoDerecho}>
+        <Input 
         label="Buscador" 
         type="text" 
         placeholder="Ingrese el titulo de la pelicula" 
         value={busqueda} 
         onChange={(e) => setBusqueda(e.target.value)} 
       />
-      
-      <br />
-      <div className={styles.filtros}> 
+       <button 
+       onClick={() => setMostrarContador(!mostrarContador)}
+      className={styles.botonIcono}
+      title="">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <circle cx="12" cy="10" r="3"></circle>
+          <path d="M7 21h10"></path>
+          <path d="M12 17v4"></path></svg>
+          </button>
+        <Boton className={styles.agregar} texto="Agregar Pelicula" funcion="" />
+      </div>
+      </div>
+      <div className={styles.barraFiltros}>
+        <div className={styles.barraPosicion}>
+        <div className={styles.filtros}> 
         <Filtro 
         opciones={generos.map(g => ({ value: g, label: g }))} 
         onChange={(evento) => setGeneroElegido(evento.target.value)}
-        titulo="Género"
         />
 
         <Filtro 
         opciones={tipos.map(t => ({ value: t, label: t }))} 
         onChange={(evento) => setTipoElegido(evento.target.value)} 
-        titulo="Tipo"
         />
       </div>
-
-      <div className={styles.seccionOrden}>
-        <p>Ordenar por:</p>
+      <div>
         <Ordenador 
           criterio={orden.criterio} 
           sentido={orden.sentido} 
           onChange={manejarOrden} 
         />
       </div>
-        
-        <Boton texto="Agregar Pelicula" funcion="" />
-        <Contador Peliculas={peliculas} />
-
-      <br /><br /><br />
-
+      </div>
+      </div>
+        <div className={styles.container}>
+         {mostrarContador && (
+          <div className={styles.modalContador}>
+            <Contador Peliculas={peliculas} />
+          </div>
+        )}
       <div className={styles.containerMovieCard}>
-        {peliculasOrdenadas.map((pelicula) => (
+        {peliculasOrdenadas.length > 0 ? (
+         peliculasOrdenadas.map((pelicula) => (
           <MovieCard
             key={pelicula.id}
             id={pelicula.id}
@@ -150,7 +167,9 @@ const Home = () => {
             cambiarEstado={editarEstado}
             eliminarPelicula={eliminarPelicula}
           />
-        ))}
+        ))
+      ) : (<MensajeAlerta mensajeAlerta="No se encontraron resultados." />)
+      }
       </div>
 
       {peliculaSeleccionada && (
@@ -162,6 +181,7 @@ const Home = () => {
           />
         </div>
       )}
+    </div>
     </div>
   );
 }

@@ -3,14 +3,15 @@ import Select from '../select/select';
 import styles from './filtro.module.css';
 
 
-const Filtro = ({opciones, onChange, titulo}) => {
+const Filtro = ({opciones, onChange}) => {
     return (
         <div className={styles.contenedor}>
-          {titulo && <span className={styles.titulo}>{titulo}</span>}
+          <div className={styles.ordenSelect}>
           <Select 
             opciones={opciones}
             onChange={onChange}
           />
+          </div>
         </div>
     );
 }
