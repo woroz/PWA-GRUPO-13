@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import styles from './formulario.module.css';
+import styles from './formularioEditar.module.css';
 import Titulo from '../titulo/titulo';
 import Boton from '../boton/boton';
 
-const Formulario = ({ titulo, pelicula, onClick }) => {
+const FormularioEditar = ({ titulo, pelicula, onClick }) => {
   const [formData, setFormData] = useState({
   titulo: "",
   genero: "",
@@ -81,4 +81,4 @@ const Formulario = ({ titulo, pelicula, onClick }) => {
     );
 };
 
-export default Formulario;
+export default FormularioEditar;
