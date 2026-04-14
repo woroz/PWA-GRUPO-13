@@ -20,6 +20,7 @@ const MovieCard = ({ id, imagen, titulo, genero, tipo, anio, estado, rating, cli
         <div className={styles.fila}>
           <span>{anio}</span>
 
+          {/* 👇 rating ya incluido correctamente */}
           <span className={styles.rating}>{rating}</span>
 
           <span className={estado ? styles.vista : styles.noVista}>
@@ -33,9 +34,17 @@ const MovieCard = ({ id, imagen, titulo, genero, tipo, anio, estado, rating, cli
             funcion={() => clickEditar({ id, imagen, titulo, genero, tipo, anio, estado, rating })}
           />
 
-          <Boton texto="Eliminar" className={styles.danger} funcion={() => eliminarPelicula(id)} />
+          <Boton 
+            texto="Eliminar" 
+            className={styles.danger} 
+            funcion={() => eliminarPelicula(id)} 
+          />
 
-          <Boton texto="Visto" funcion={() => cambiarEstado(id)} />
+         
+          <Boton 
+            texto="Visto" 
+            funcion={() => cambiarEstado(id)} 
+          />
         </div>
       </div>
 

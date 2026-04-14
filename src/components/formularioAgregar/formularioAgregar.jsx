@@ -1,26 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import styles from './formularioEditar.module.css';
+import React, { useState } from 'react';
 import Titulo from '../titulo/titulo';
 import Boton from '../boton/boton';
+import styles from './formularioAgregar.module.css';
 
-const FormularioEditar = ({ titulo, pelicula, onClick, onClose }) => {
+const FormularioAgregar = ({ onAgregar, onClose }) => {
 
   const [formData, setFormData] = useState({
-    id: null,
+    imagen: "",
     titulo: "",
     genero: "",
     tipo: "",
     anio: "",
-    imagen: "",
-    estado: false,
-    rating: ""
+    rating: "",
+    estado: false
   });
-
-  useEffect(() => {
-    if (pelicula) {
-      setFormData(pelicula);
-    }
-  }, [pelicula]);
 
   const valorInput = (e) => {
     const { name, value } = e.target;
@@ -35,27 +28,26 @@ const FormularioEditar = ({ titulo, pelicula, onClick, onClose }) => {
     const file = e.target.files[0];
 
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({
-          ...formData,
-          imagen: reader.result
-        });
-      };
-      reader.readAsDataURL(file);
+      const url = URL.createObjectURL(file);
+
+      setFormData({
+        ...formData,
+        imagen: url
+      });
     }
   };
 
   const enviar = () => {
-    onClick({
+    onAgregar({
       ...formData,
-      rating: Number(formData.rating) 
+      rating: Number(formData.rating),
+      anio: Number(formData.anio)
     });
   };
 
   return (
-    <div className={styles.form}>
-      <Titulo texto={titulo} />
+    <div className={styles.container}>
+      <Titulo texto="Agregar Película" />
 
       <label>Titulo</label>
       <input
@@ -74,12 +66,15 @@ const FormularioEditar = ({ titulo, pelicula, onClick, onClose }) => {
       />
 
       <label>Tipo</label>
-      <input
-        type="text"
+      <select
         name="tipo"
         value={formData.tipo}
         onChange={valorInput}
-      />
+      >
+        <option value=""></option>
+        <option value="pelicula">Pelicula</option>
+        <option value="serie">Serie</option>
+      </select>
 
       <label>Año</label>
       <input
@@ -108,10 +103,10 @@ const FormularioEditar = ({ titulo, pelicula, onClick, onClose }) => {
       />
 
       {formData.imagen && (
-        <img 
-          src={formData.imagen} 
-          alt="preview" 
-          className={styles.preview}
+        <img
+          src={formData.imagen}
+          alt="preview"
+          width="100"
         />
       )}
 
@@ -123,4 +118,4 @@ const FormularioEditar = ({ titulo, pelicula, onClick, onClose }) => {
   );
 };
 
-export default FormularioEditar;
+export default FormularioAgregar;
