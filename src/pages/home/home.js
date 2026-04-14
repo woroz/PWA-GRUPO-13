@@ -4,11 +4,12 @@ import Titulo from '../../components/titulo/titulo'
 import Boton from '../../components/boton/boton'
 import Contador from '../../components/contador/contador';
 import MovieCard from '../../components/movieCard/movieCard';
-import Formulario from '../../components/formulario/formulario';
+import FormularioEditar from '../../components/formularioEditar/formularioEditar';
 import Input from '../../components/input/input';
 import Filtro from '../../components/filtro/filtro';
-import Ordenador from '../../components/ordenador/Ordenador';
+import Ordenador from '../../components/ordenador/ordenador';
 import MensajeAlerta from '../../components/mensajeAlerta/mensajeAlerta';
+import FormularioAgregar from '../../components/formularioAgregar/formularioAgregar';
 
 const Peliculas = [
   { id: 1, imagen: "", titulo: "Inception", genero: "Ciencia ficcion", tipo: "Pelicula", anio: 2010, estado: true, rating: 8.8 },
@@ -24,26 +25,37 @@ const Peliculas = [
 ];
 
 const Home = () => {
+
   const [peliculas, setPeliculas] = useState(() => {
     const guardadas = localStorage.getItem("peliculas");
     return guardadas ? JSON.parse(guardadas) : Peliculas;
   });
 
   const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
-
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [busqueda, setBusqueda] = useState("");
-
-  const [generoElegido, setGeneroElegido] = useState("Todos los generos");
-
-  const [tipoElegido, setTipoElegido] = useState("Todos los tipos");
-
-  const [orden, setOrden] = useState ({ criterio: 'año', sentido: 'asc' });
-
+  const [generoElegido, setGeneroElegido] = useState("todos los generos");
+  const [tipoElegido, setTipoElegido] = useState("todos los tipos");
+  const [orden, setOrden] = useState({ criterio: 'año', sentido: 'asc' });
   const [mostrarContador, setMostrarContador] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("peliculas", JSON.stringify(peliculas));
   }, [peliculas]);
+
+  const agregarPelicula = (data) => {
+    const nuevoId = peliculas.length > 0
+      ? Math.max(...peliculas.map(p => p.id)) + 1
+      : 1;
+
+    const nuevaPelicula = {
+      ...data,
+      id: nuevoId
+    };
+
+    setPeliculas([...peliculas, nuevaPelicula]);
+    setMostrarFormulario(false);
+  };
 
   const editarPelicula = (pelicula) => {
     setPeliculaSeleccionada(pelicula);
@@ -64,27 +76,16 @@ const Home = () => {
     setPeliculaSeleccionada(null);
   };
 
-  const peliculasFiltradas = peliculas.filter((peli) => {
-    const coincideTitulo = peli.titulo.toLowerCase().includes(busqueda.toLowerCase());
-    const coincideGenero = generoElegido === "Todos los generos" || peli.genero.toLowerCase() === generoElegido;
-    const coincideTipo = tipoElegido === "Todos los tipos" || peli.tipo.toLowerCase() === tipoElegido;
-    return coincideTitulo && coincideGenero && coincideTipo;
-  });
-
-  const peliculasOrdenadas = [...peliculasFiltradas].sort((a, b) => {
-    const campo = orden.criterio === 'año' ? 'anio' : 'rating';
-    if (orden.sentido === 'asc') {
-      return a[campo] - b[campo];
-    } else {
-      return b[campo] - a[campo];
-    }
-  })
+  const laEliminamos = () => {
+    return window.confirm("¿Seguro que querés eliminar esta película?");
+  };
 
   const eliminarPelicula = (id) => {
-    const nuevasPeliculas = peliculas.filter((peli) => peli.id !== id)
-    
-    setPeliculas(nuevasPeliculas)
-  }
+    if (laEliminamos()) {
+      const nuevasPeliculas = peliculas.filter((peli) => peli.id !== id);
+      setPeliculas(nuevasPeliculas);
+    }
+  };
 
   const manejarOrden = (evento) => {
     const { name, value } = evento.target;
@@ -92,98 +93,136 @@ const Home = () => {
       ...orden,
       [name]: value
     });
-  }
+  };
 
-  const generos = ["Todos los generos", ...new Set(peliculas.map(p => p.genero.toLowerCase()))];
-  const tipos = ["Todos los tipos", ...new Set(peliculas.map(p => p.tipo.toLowerCase()))];
+  const peliculasFiltradas = peliculas.filter((peli) => {
+    const coincideTitulo =
+      (peli.titulo || "").toLowerCase().includes(busqueda.toLowerCase());
+
+    const coincideGenero =
+      generoElegido === "todos los generos" ||
+      (peli.genero || "").toLowerCase() === generoElegido;
+
+    const coincideTipo =
+      tipoElegido === "todos los tipos" ||
+      (peli.tipo || "").toLowerCase() === tipoElegido;
+
+    return coincideTitulo && coincideGenero && coincideTipo;
+  });
+
+  const peliculasOrdenadas = [...peliculasFiltradas].sort((a, b) => {
+    const campo = orden.criterio === 'año' ? 'anio' : 'rating';
+    return orden.sentido === 'asc'
+      ? a[campo] - b[campo]
+      : b[campo] - a[campo];
+  });
+
+  const generos = ["todos los generos", ...new Set(peliculas.map(p => (p.genero || "").toLowerCase()))];
+  const tipos = ["todos los tipos", ...new Set(peliculas.map(p => (p.tipo || "").toLowerCase()))];
 
   return (
     <div>
       <div className={styles.header}>
         <Titulo texto="Gestor de peliculas" />
+
         <div className={styles.ladoDerecho}>
-        <Input 
-        label="Buscador" 
-        type="text" 
-        placeholder="Ingrese el titulo de la pelicula" 
-        value={busqueda} 
-        onChange={(e) => setBusqueda(e.target.value)} 
-      />
-       <button 
-       onClick={() => setMostrarContador(!mostrarContador)}
-      className={styles.botonIcono}
-      title="">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-          <circle cx="12" cy="10" r="3"></circle>
-          <path d="M7 21h10"></path>
-          <path d="M12 17v4"></path></svg>
-          </button>
-        <Boton className={styles.agregar} texto="Agregar Pelicula" funcion="" />
+          <Input
+            label="Buscador"
+            type="text"
+            placeholder="Ingrese el titulo de la pelicula"
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+          />
+
+          <button
+            onClick={() => setMostrarContador(!mostrarContador)}
+            className={styles.botonIcono}
+          />
+
+          <Boton
+            className={styles.agregar}
+            texto="Agregar Pelicula"
+            funcion={() => setMostrarFormulario(true)}
+          />
+        </div>
       </div>
-      </div>
+
       <div className={styles.barraFiltros}>
         <div className={styles.barraPosicion}>
-        <div className={styles.filtros}> 
-        <Filtro 
-        opciones={generos.map(g => ({ value: g, label: g }))} 
-        onChange={(evento) => setGeneroElegido(evento.target.value)}
-        />
+          <div className={styles.filtros}>
+            <Filtro
+              opciones={generos.map(g => ({ value: g, label: g }))}
+              onChange={(e) => setGeneroElegido(e.target.value)}
+            />
 
-        <Filtro 
-        opciones={tipos.map(t => ({ value: t, label: t }))} 
-        onChange={(evento) => setTipoElegido(evento.target.value)} 
-        />
+            <Filtro
+              opciones={tipos.map(t => ({ value: t, label: t }))}
+              onChange={(e) => setTipoElegido(e.target.value)}
+            />
+          </div>
+
+          <Ordenador
+            criterio={orden.criterio}
+            sentido={orden.sentido}
+            onChange={manejarOrden}
+          />
+        </div>
       </div>
-      <div>
-        <Ordenador 
-          criterio={orden.criterio} 
-          sentido={orden.sentido} 
-          onChange={manejarOrden} 
-        />
-      </div>
-      </div>
-      </div>
-        <div className={styles.container}>
-         {mostrarContador && (
+
+      <div className={styles.container}>
+
+        {mostrarContador && (
           <div className={styles.modalContador}>
             <Contador Peliculas={peliculas} />
           </div>
         )}
-      <div className={styles.containerMovieCard}>
-        {peliculasOrdenadas.length > 0 ? (
-         peliculasOrdenadas.map((pelicula) => (
-          <MovieCard
-            key={pelicula.id}
-            id={pelicula.id}
-            imagen={pelicula.imagen}
-            titulo={pelicula.titulo}
-            genero={pelicula.genero}
-            tipo={pelicula.tipo}
-            anio={pelicula.anio}
-            estado={pelicula.estado}
-            rating={pelicula.rating}
-            clickEditar={editarPelicula}
-            cambiarEstado={editarEstado}
-            eliminarPelicula={eliminarPelicula}
-          />
-        ))
-      ) : (<MensajeAlerta mensajeAlerta="No se encontraron resultados." />)
-      }
+
+        <div className={styles.containerMovieCard}>
+          {peliculasOrdenadas.length > 0 ? (
+            peliculasOrdenadas.map((pelicula) => (
+              <MovieCard
+                key={pelicula.id}
+                id={pelicula.id}
+                imagen={pelicula.imagen}
+                titulo={pelicula.titulo}
+                genero={pelicula.genero}
+                tipo={pelicula.tipo}
+                anio={pelicula.anio}
+                estado={pelicula.estado}
+                rating={pelicula.rating}
+                clickEditar={editarPelicula}
+                cambiarEstado={editarEstado}
+                eliminarPelicula={eliminarPelicula}
+              />
+            ))
+          ) : (
+            <MensajeAlerta mensajeAlerta="No se encontraron resultados." />
+          )}
+        </div>
+
+        {peliculaSeleccionada && (
+          <div className={styles.containerForm}>
+            <FormularioEditar
+              titulo="Editar Película"
+              pelicula={peliculaSeleccionada}
+              onClick={onClickEditar}
+              onClose={() => setPeliculaSeleccionada(null)}
+            />
+          </div>
+        )}
       </div>
 
-      {peliculaSeleccionada && (
+      {mostrarFormulario && (
         <div className={styles.containerForm}>
-          <Formulario
-            titulo="Editar Película"
-            pelicula={peliculaSeleccionada}
-            onClick={onClickEditar}
+          <FormularioAgregar
+            onAgregar={agregarPelicula}
+            onClose={() => setMostrarFormulario(false)}
           />
         </div>
       )}
-    </div>
+
     </div>
   );
-}
+};
 
 export default Home;
