@@ -1,4 +1,5 @@
 import styles from './titulo.module.css';
+import React from 'react';
 
 const Titulo = ( { texto }) => {
     return (

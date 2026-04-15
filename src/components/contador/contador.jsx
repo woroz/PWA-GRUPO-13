@@ -1,5 +1,7 @@
 import styles from "./contador.module.css";
 import Titulo from "../titulo/titulo";
+import React from 'react';
+
 const Contador = ({ Peliculas }) => {
 
     let cantidadPeliculas = Peliculas.length;
