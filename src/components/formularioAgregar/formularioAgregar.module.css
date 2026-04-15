@@ -1,12 +1,17 @@
-.container {
-  background-color: #1e1e1e;
-  padding: 20px;
-  border-radius: 12px;
-  width: 300px;
-  margin: 20px auto;
+.contenedor {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.form {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 20px;
+  width: 300px;
+  background-color: #1e1e1e;
+  border-radius: 12px;
 }
 
 label {
@@ -44,4 +49,29 @@ select {
   border: none;
   background-color: #2a2a2a;
   color: white;
+}
+
+.nombreArchivo {
+  font-size: 14px;
+  color: #b9b7b7;
+}
+
+.error {
+  color: #e53935;
+  font-size: 13px;
+  margin-top: 4px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(-5px);
+  animation: aparecerError 0.2s ease forwards;
+}
+
+@keyframes aparecerError {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

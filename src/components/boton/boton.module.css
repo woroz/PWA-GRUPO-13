@@ -33,3 +33,12 @@
 .danger:hover {
   background-color: #c62828;
 }
+
+.primary {
+  background-color: #2196F3;
+  color: white;
+}
+
+.primary:hover {
+  background-color: #1976D2;
+}

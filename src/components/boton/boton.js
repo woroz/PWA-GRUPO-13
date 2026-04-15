@@ -4,7 +4,9 @@ const Boton = ({ texto, funcion, variant }) => {
   return (
     <button
       onClick={funcion}
-      className={`${styles.botonModule} ${variant === 'danger' ? styles.danger : ''}`}
+      className={`${styles.botonModule} 
+      ${variant === 'danger' ? styles.danger : ''} 
+      ${variant === 'primary' ? styles.primary : ''}`}
     >
       {texto}
     </button>
