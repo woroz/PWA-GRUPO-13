@@ -1,5 +1,6 @@
 import styles from './movieCard.module.css';
 import Boton from '../boton/boton';
+import React from 'react';
 
 const MovieCard = ({ id, imagen, titulo, director, genero, tipo, anio, estado, rating, clickEditar, cambiarEstado, eliminarPelicula }) => { 
   return ( 

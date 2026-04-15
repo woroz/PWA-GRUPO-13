@@ -1,4 +1,5 @@
 import Styles from "./select.module.css";
+import React from 'react';
 
 const Select = ({ opciones, onChange }) => {
     return (

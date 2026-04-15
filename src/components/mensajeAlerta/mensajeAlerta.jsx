@@ -1,4 +1,5 @@
 import Style from './mensajeAlerta.module.css';
+import React from 'react';
 
 const MensajeAlerta = ( { mensajeAlerta } ) => {
   return (

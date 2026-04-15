@@ -1,4 +1,4 @@
-
+import React from 'react';
 import Select from '../select/select';
 import styles from './filtro.module.css';
 

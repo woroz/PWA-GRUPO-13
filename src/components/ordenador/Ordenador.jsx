@@ -1,4 +1,5 @@
 import styles from './ordenador.module.css';
+import React from 'react';
 
 function Ordenador({ criterio, sentido, onChange }) {
   return (

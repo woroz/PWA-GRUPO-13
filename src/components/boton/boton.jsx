@@ -1,4 +1,5 @@
 import styles from './boton.module.css';
+import React from 'react';
 
 const Boton = ({ texto, funcion, variant }) => {
   return (
