@@ -102,7 +102,8 @@ const Home = () => {
 
   const peliculasFiltradas = peliculas.filter((peli) => {
     const coincideTitulo =
-      (peli.titulo || "").toLowerCase().includes(busqueda.toLowerCase());
+      (peli.titulo || "").toLowerCase().includes(busqueda.toLowerCase()) ||
+      (peli.director || "").toLowerCase().includes(busqueda.toLowerCase());
 
     const coincideGenero =
       generoElegido === "todos los generos" ||
@@ -139,7 +140,7 @@ const Home = () => {
           <Input
             label="Buscador"
             type="text"
-            placeholder="Ingrese el titulo de la pelicula"
+            placeholder="Ingrese el titulo o el director de la pelicula"
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
           />
