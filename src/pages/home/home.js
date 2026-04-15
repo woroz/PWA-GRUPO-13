@@ -14,16 +14,16 @@ import Radio from '../../components/radio/Radio';
 
 
 const Peliculas = [
-  { id: 1, imagen: "", titulo: "Inception", genero: "Ciencia ficcion", tipo: "Pelicula", anio: 2010, estado: true, rating: 8.8 },
-  { id: 2, imagen: "", titulo: "Titanic", genero: "Romance", tipo: "Pelicula", anio: 1997, estado: false, rating: 7.8 },
-  { id: 3, imagen: "", titulo: "Cobra Kai", genero: "Accion", tipo: "Serie", anio: 2018, estado: true, rating: 8.2 },
-  { id: 4, imagen: "", titulo: "The Dark Knight", genero: "Accion", tipo: "Pelicula", anio: 2008, estado: true, rating: 9.0 },
-  { id: 5, imagen: "", titulo: "Stranger Things", genero: "Terror", tipo: "Serie", anio: 2016, estado: false, rating: 8.7 },
-  { id: 6, imagen: "", titulo: "Interstellar", genero: "Ciencia ficcion", tipo: "Pelicula", anio: 2014, estado: true, rating: 8.6 },
-  { id: 7, imagen: "", titulo: "Black Mirror", genero: "Ciencia ficcion", tipo: "Serie", anio: 2011, estado: false, rating: 8.0 },
-  { id: 8, imagen: "", titulo: "Superbad", genero: "Comedia", tipo: "Pelicula", anio: 2007, estado: false, rating: 7.6 },
-  { id: 9, imagen: "", titulo: "The Hangover", genero: "Comedia", tipo: "Pelicula", anio: 2009, estado: true, rating: 7.9 },
-  { id: 10, imagen: "", titulo: "The Witcher", genero: "Fantasia", tipo: "Serie", anio: 2019, estado: true, rating: 8.3 }
+  { id: 1, imagen: "", titulo: "Inception", director: "Christopher Nolan", genero: "Ciencia ficcion", tipo: "Pelicula", anio: 2010, estado: true, rating: 8.8 },
+  { id: 2, imagen: "", titulo: "Titanic", director: "James Cameron", genero: "Romance", tipo: "Pelicula", anio: 1997, estado: false, rating: 7.8 },
+  { id: 3, imagen: "", titulo: "Cobra Kai", director: "John Stockwell", genero: "Accion", tipo: "Serie", anio: 2018, estado: true, rating: 8.2 },
+  { id: 4, imagen: "", titulo: "The Dark Knight", director: "Christopher Nolan", genero: "Accion", tipo: "Pelicula", anio: 2008, estado: true, rating: 9.0 },
+  { id: 5, imagen: "", titulo: "Stranger Things", director: "The Duffer Brothers", genero: "Terror", tipo: "Serie", anio: 2016, estado: false, rating: 8.7 },
+  { id: 6, imagen: "", titulo: "Interstellar", director: "Christopher Nolan", genero: "Ciencia ficcion", tipo: "Pelicula", anio: 2014, estado: true, rating: 8.6 },
+  { id: 7, imagen: "", titulo: "Black Mirror", director: "Charlie Brooker", genero: "Ciencia ficcion", tipo: "Serie", anio: 2011, estado: false, rating: 8.0 },
+  { id: 8, imagen: "", titulo: "Superbad", director: "Judd Apatow", genero: "Comedia", tipo: "Pelicula", anio: 2007, estado: false, rating: 7.6 },
+  { id: 9, imagen: "", titulo: "The Hangover", director: "Todd Phillips", genero: "Comedia", tipo: "Pelicula", anio: 2009, estado: true, rating: 7.9 },
+  { id: 10, imagen: "", titulo: "The Witcher", director: "Lauren Schmidt Hissrich", genero: "Fantasia", tipo: "Serie", anio: 2019, estado: true, rating: 8.3 }
 ];
 
 const Home = () => {
@@ -248,6 +248,7 @@ const Home = () => {
                 id={pelicula.id}
                 imagen={pelicula.imagen}
                 titulo={pelicula.titulo}
+                director={pelicula.director}
                 genero={pelicula.genero}
                 tipo={pelicula.tipo}
                 anio={pelicula.anio}
