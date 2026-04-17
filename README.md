@@ -16,7 +16,7 @@ El Gestor de Peliculas permite a los usuarios mantener un registro de sus produc
 * **Visualización:** Listado dinámico de películas con tarjetas detalladas.
 * **Filtros:** Filtrado por genero (Accion, Comedia, Drama, etc.) y tipo (Pelicula o Serie).
 * **Busqueda:** Buscador en tiempo real por titulo o director.
-* **Ordenamiento:** Organización alfabatica (Ascendente/Descendente) y por año de estreno.
+* **Ordenamiento:** Organización alfabetica (Ascendente/Descendente) y por año de estreno.
 * **Gestion de Estado:** Marcado de contenidos como "Vistos" o "Pendientes".
 
 ---
