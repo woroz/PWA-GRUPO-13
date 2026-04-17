@@ -28,7 +28,7 @@ Segui estos pasos para tener el proyecto funcionando localmente:
 ### 1. Clonar el repositorio
 Abri una terminal y ejecuta:
 ```bash
-git clone [https://github.com/woroz/PWA-GRUPO-13.git](https://github.com/woroz/PWA-GRUPO-13.git)
+git clone https://github.com/woroz/PWA-GRUPO-13.git
 cd PWA-GRUPO-13
 ```
 
