@@ -1,4 +1,4 @@
-<img width="1914" height="938" alt="image" src="https://github.com/user-attachments/assets/5fbf71d0-56af-4e4b-8658-9412f386f6b4" /># Gestor de Peliculas - PWA GRUPO 13
+# Gestor de Peliculas - PWA GRUPO 13
 
 Aplicación web para la gestion y organizacion de peliculas y series desarrollada en React.
 
@@ -58,10 +58,14 @@ La aplicación estara disponible en `http://localhost:3000`.
 <img width="1917" height="944" alt="image" src="https://github.com/user-attachments/assets/2a9e987b-aab5-4ab2-9f47-97c3e4212e3f" />
 
 ### Peliculas Vistas
-<img width="1919" height="947" alt="image" src="https://github.com/user-attachments/assets/a8fa8a4e-785f-4faa-8026-fcc7907d1ee6" /> peliculas vistas
+<img width="1919" height="947" alt="image" src="https://github.com/user-attachments/assets/a8fa8a4e-785f-4faa-8026-fcc7907d1ee6" />
 
 ### Filtro por Tipo
-<img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/816c552e-7349-465b-b92c-09970e389f7f" /> filtro por tipo
+<img width="1919" height="943" alt="image" src="https://github.com/user-attachments/assets/816c552e-7349-465b-b92c-09970e389f7f" />
 
+### Archivos Base
 
-
+* **`index.jsx`**: Es el archivo principal del proyecto. Se importa React y se utiliza ReactDOM para renderizar el componente principal en el elemento raiz del HTML.
+* **`App.jsx`**: El componente principal de la aplicacion. Se define la lógica principal, se gestiona el esrado global y se organiza la estructura de toda la interfaz
+* **`index.css`**: Contiene los estilos globales que afectan a toda la aplicacion.
+* **`package.json`**: El archivo de configuración del proyecto. Incluye las dependencias necesarias y los comandos para ejecutar la app.
